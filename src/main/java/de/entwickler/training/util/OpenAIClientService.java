@@ -1,7 +1,6 @@
 package de.entwickler.training.util;
 
-import com.openai.client.OpenAIClient;
-import com.openai.client.okhttp.OpenAIOkHttpClient;
+import io.github.sashirestela.openai.SimpleOpenAI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,34 +8,34 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class OpenAIClientManger {
-    private static final Logger logger = LoggerFactory.getLogger(OpenAIClientManger.class);
+public class OpenAIClientService {
+    private static final Logger logger = LoggerFactory.getLogger(OpenAIClientService.class);
 
-    private OpenAIClient openAIClient;
+    private SimpleOpenAI simpleOpenAI;
 
-    private static OpenAIClientManger instance;
+    private static OpenAIClientService instance;
 
     private record OpenAiProperties(String baseUrl, String apiKey) {}
 
-    private OpenAIClientManger() {
+    private OpenAIClientService() {
     }
 
-    public static synchronized OpenAIClientManger getInstance() {
+    public static synchronized OpenAIClientService getInstance() {
         if (instance == null) {
-            instance = new OpenAIClientManger();
+            instance = new OpenAIClientService();
         }
         return instance;
     }
 
-    public OpenAIClient getOpenAIClient() {
-        if(openAIClient == null) {
+    public SimpleOpenAI getOpenAIClient() {
+        if(simpleOpenAI == null) {
             OpenAiProperties openAiProperties = getOpenAiProperties();
-            openAIClient = OpenAIOkHttpClient.builder()
-                    .baseUrl(openAiProperties.baseUrl())
+            simpleOpenAI = SimpleOpenAI.builder()
+                    // .baseUrl(openAiProperties.baseUrl())
                     .apiKey(openAiProperties.apiKey())
                     .build();
         }
-        return openAIClient;
+        return simpleOpenAI;
     }
 
     private OpenAiProperties getOpenAiProperties() {
@@ -44,7 +43,7 @@ public class OpenAIClientManger {
         String fileName = "config.properties"; // Name of the properties file in the classpath
 
         // Use try-with-resources to ensure the InputStream is closed automatically
-        try (InputStream input = OpenAIClientManger.class.getClassLoader().getResourceAsStream(fileName)) {
+        try (InputStream input = OpenAIClientService.class.getClassLoader().getResourceAsStream(fileName)) {
 
             if (input == null) {
                 throw new RuntimeException("Sorry, unable to find " + fileName);

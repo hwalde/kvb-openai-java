@@ -1,18 +1,23 @@
 package de.entwickler.training;
 
-import com.openai.models.ChatModel;
-import com.openai.models.chat.completions.ChatCompletion;
-import com.openai.models.chat.completions.ChatCompletionCreateParams;
-import de.entwickler.training.util.OpenAIClientManger;
+import de.entwickler.training.util.OpenAIClientService;
+import io.github.sashirestela.openai.domain.chat.ChatMessage;
+import io.github.sashirestela.openai.domain.chat.ChatRequest;
+
 
 public class Main {
     public static void main(String[] args) {
-        ChatCompletionCreateParams params = ChatCompletionCreateParams.builder()
-                .addUserMessage("Say this is a test")
-                .model(ChatModel.GPT_4_1_MINI)
+        ChatRequest chatRequest = ChatRequest.builder()
+                .model("gpt-4o-mini")
+                .message(ChatMessage.UserMessage.of("Say this is a test"))
                 .build();
-        ChatCompletion chatCompletion = OpenAIClientManger.getInstance().getOpenAIClient().chat().completions().create(params);
-
-        System.out.println(chatCompletion.choices().getFirst().message().content());
+        var futureChat = OpenAIClientService.getInstance().getOpenAIClient().chatCompletions().create(chatRequest);
+        var chatResponse = futureChat.join();
+        chatResponse.getChoices().forEach(choice -> {
+            System.out.println(choice.getMessage().getRole());
+            System.out.println(choice.getMessage().getContent());
+            System.out.println();
+        });
+        // System.out.println(chatResponse.firstContent());
     }
 }
