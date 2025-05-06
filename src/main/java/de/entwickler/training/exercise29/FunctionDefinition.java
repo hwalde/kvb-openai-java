@@ -58,6 +58,8 @@ public class FunctionDefinition {
 
         // TODO: Erstelle die Chat-Request-Parameter mit dem Prompt und der Funktionsdefinition
         // Hinweis: Verwende ChatRequest.builder()
+        // Beispiel:
+        // var chatRequest = ChatRequest.builder()
         //         .model("gpt-4o-mini")
         //         .message(UserMessage.of(prompt))
         //         .tools(functionExecutor.getToolFunctions())
@@ -65,11 +67,21 @@ public class FunctionDefinition {
 
 
         // TODO: Sende die Anfrage an die OpenAI API und speichere die Antwort
+        // Beispiel:
         // var chatResponse = openAIClient.chatCompletions().create(chatRequest).join();
 
 
         // TODO: Prüfe, ob das Modell die Funktion aufrufen möchte
         // Hinweis: Überprüfe die toolCalls in der Antwort
+        // Beispiel:
+        // var chatMessage = chatResponse.firstMessage();
+        // if (chatMessage.getToolCalls() != null && !chatMessage.getToolCalls().isEmpty()) {
+        //     var toolCall = chatMessage.getToolCalls().get(0);
+        //     System.out.println("Das Modell möchte die Funktion '" + toolCall.getFunction().getName() + "' aufrufen.");
+        //     System.out.println("Argumente: " + toolCall.getFunction().getArguments());
+        // } else {
+        //     System.out.println("Das Modell möchte keine Funktion aufrufen.");
+        // }
 
         System.out.println("Antwort von gpt-4o-mini:");
         // Dein Code hier...

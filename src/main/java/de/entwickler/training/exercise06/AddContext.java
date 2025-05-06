@@ -2,6 +2,8 @@ package de.entwickler.training.exercise06;
 
 import de.entwickler.training.util.OpenAIClientService;
 import io.github.sashirestela.openai.domain.chat.ChatRequest;
+import io.github.sashirestela.openai.domain.chat.ChatMessage.UserMessage;
+import io.github.sashirestela.openai.domain.chat.Chat;
 
 
 /**
@@ -39,15 +41,24 @@ public class AddContext {
 
         // TODO: Erstelle die Chat-Request-Parameter für den einfachen Prompt
         // Hinweis: Verwende ChatRequest.builder()...
+        // Beispiel:
+        // var chatRequest = ChatRequest.builder()
+        //         .model("gpt-4o-mini")
+        //         .message(UserMessage.of(simplePrompt))
+        //         .build();
 
 
         // TODO: Sende die Anfrage an die OpenAI API und speichere die Antwort
         // Hinweis: Verwende openAIClient.chatCompletions().create(chatRequest).join();
+        // Beispiel:
+        // var chatResponse = openAIClient.chatCompletions().create(chatRequest).join();
 
 
         // TODO: Extrahiere und gib die Antwort auf den einfachen Prompt aus
         System.out.println("Antwort auf den einfachen Prompt:");
         // Dein Code hier...
+        // Beispiel:
+        // System.out.println(chatResponse.firstContent());
 
         System.out.println("\n----------------------------------------\n");
 

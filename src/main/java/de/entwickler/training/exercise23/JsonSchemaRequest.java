@@ -1,20 +1,23 @@
- 
 package de.entwickler.training.exercise23;
 
 import de.entwickler.training.util.OpenAIClientService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.sashirestela.openai.domain.chat.ChatRequest;
+import io.github.sashirestela.openai.domain.chat.ChatMessage.UserMessage;
+import io.github.sashirestela.openai.common.ResponseFormat;
+import io.github.sashirestela.openai.domain.chat.Chat;
 /**
  * Übung 23: JSON Schema vorgeben (gpt-4o-mini)
- * 
+ *
  * Ziel: Dem gpt-4o-mini im JSON Mode eine gewünschte Struktur (implizit durch Beschreibung) vorgeben.
- * 
+ *
  * Modell: gpt-4o-mini
- * 
+ *
  * Wichtige Parameter/Konzepte:
  * - response_format={ "type": "json_object" }
  * - Beschreibung der gewünschten JSON-Struktur im Prompt
- * 
+ *
  * Aufgabe:
  * 1. Erstelle einen Prompt, der eine komplexere JSON-Struktur beschreibt
  *    (z.B. "Erstelle ein JSON-Objekt, das eine Person repräsentiert. Es soll einen Schlüssel 'name' (String),
@@ -23,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * 2. Setze den response_format-Parameter auf { "type": "json_object" }
  * 3. Sende die Anfrage an die OpenAI API
  * 4. Gib die Antwort aus und prüfe, ob sie der gewünschten Struktur entspricht
- * 
+ *
  * Hinweis: Der JSON Mode ist nur bei bestimmten Modellen verfügbar, darunter gpt-4o-mini.
  */
 public class JsonSchemaRequest {
@@ -36,14 +39,22 @@ public class JsonSchemaRequest {
         var openAIClient = OpenAIClientService.getInstance().getOpenAIClient();
         // TODO: Erstelle die Chat-Completion-Parameter mit dem Prompt und dem JSON Mode
         // Hinweis: Verwende ChatRequest.builder()
-        //         .addUserMessage(prompt)
-        //         .model(ChatModel.GPT_4_1_MINI)
-        //         .responseFormat(ChatRequest.ResponseFormat.builder().type("json_object").build())
+        // Beispiel:
+        // var chatRequest = ChatRequest.builder()
+        //         .model("gpt-4o-mini")
+        //         .message(UserMessage.of(prompt))
+        //         .responseFormat(ResponseFormat.jsonObject())
         //         .build();
         // TODO: Sende die Anfrage an die OpenAI API und speichere die Antwort
+        // Beispiel:
+        // var chatResponse = openAIClient.chatCompletions().create(chatRequest).join();
+
         // TODO: Extrahiere und gib die Antwort aus
         System.out.println("Antwort im JSON Mode mit Schema-Vorgabe:");
         // Dein Code hier...
+        // Beispiel:
+        // String jsonResponse = chatResponse.firstContent();
+        // System.out.println(jsonResponse);
         System.out.println("\n----------------------------------------\n");
         // TODO: Prüfe, ob die Antwort der gewünschten Struktur entspricht
         System.out.println("Prüfung der JSON-Struktur:");
@@ -55,7 +66,7 @@ public class JsonSchemaRequest {
     }
     /**
      * Hilfsmethode zum Überprüfen der JSON-Struktur
-     * 
+     *
      * @param jsonString Der zu überprüfende JSON-String
      */
     private static void checkJsonStructure(String jsonString) {

@@ -1,26 +1,29 @@
- 
 package de.entwickler.training.exercise21;
 
 import de.entwickler.training.util.OpenAIClientService;
+import io.github.sashirestela.openai.domain.chat.ChatRequest;
+import io.github.sashirestela.openai.domain.chat.ChatMessage.UserMessage;
+import io.github.sashirestela.openai.common.ResponseFormat;
+import io.github.sashirestela.openai.domain.chat.Chat;
 /**
  * Übung 21: JSON Mode anfordern (gpt-4o-mini)
- * 
+ *
  * Ziel: Die Fähigkeit von gpt-4o-mini nutzen, garantiert valides JSON auszugeben,
  * indem der spezielle JSON Mode der API aktiviert wird.
- * 
+ *
  * Modell: gpt-4o-mini
- * 
+ *
  * Wichtige Parameter/Konzepte:
  * - Setzen des response_format-Parameters auf { "type": "json_object" } im ChatResponseRequest
  * - Prompt muss das Wort "JSON" enthalten
- * 
+ *
  * Aufgabe:
  * 1. Erstelle einen Prompt, der das Modell anweist, ein JSON-Objekt zu generieren
  *    (z.B. "Generiere ein JSON-Objekt mit den Schlüsseln 'name' und 'stadt' für eine Person namens Max in Berlin.")
  * 2. Setze den response_format-Parameter auf { "type": "json_object" }
  * 3. Sende die Anfrage an die OpenAI API
  * 4. Gib die Antwort aus und prüfe, ob sie valides JSON ist
- * 
+ *
  * Hinweis: Der JSON Mode ist nur bei bestimmten Modellen verfügbar, darunter gpt-4o-mini.
  * Ältere Modelle wie gpt-3.5-turbo unterstützen diesen Modus nicht.
  */
@@ -32,14 +35,21 @@ public class JsonModeRequest {
         var openAIClient = OpenAIClientService.getInstance().getOpenAIClient();
         // TODO: Erstelle die Chat-Completion-Parameter mit dem Prompt und dem JSON Mode
         // Hinweis: Verwende ChatRequest.builder()
-        //         .addUserMessage(prompt)
-        //         .model(ChatModel.GPT_4_1_MINI)
-        //         .responseFormat(ChatRequest.ResponseFormat.builder().type("json_object").build())
+        // Beispiel:
+        // var chatRequest = ChatRequest.builder()
+        //         .model("gpt-4o-mini")
+        //         .message(UserMessage.of(prompt))
+        //         .responseFormat(ResponseFormat.jsonObject())
         //         .build();
         // TODO: Sende die Anfrage an die OpenAI API und speichere die Antwort
+        // Beispiel:
+        // var chatResponse = openAIClient.chatCompletions().create(chatRequest).join();
+
         // TODO: Extrahiere und gib die Antwort aus
         System.out.println("Antwort im JSON Mode:");
         // Dein Code hier...
+        // Beispiel:
+        // System.out.println(chatResponse.firstContent());
         System.out.println("\n----------------------------------------\n");
         // TODO: Prüfe, ob die Antwort valides JSON ist
         System.out.println("Prüfung des JSON-Formats:");
